@@ -1,4 +1,7 @@
 # .bashrc
+#hostname
+
+export PS1="[\u@local \w]$"
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
@@ -20,6 +23,10 @@ alias gb='git branch'
 alias gca='git commit --amend'
 alias glo='git log --oneline'
 alias gp='git pull --rebase origin development'
+alias gits='git status'
+
+
+
 
 
 
