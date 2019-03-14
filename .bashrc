@@ -1,6 +1,5 @@
 # .bashrc
 #hostname
-#test
 
 export PS1="[\u@local \w]$"
 
