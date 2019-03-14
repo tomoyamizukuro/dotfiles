@@ -17,7 +17,7 @@ alias lla='ls -l -a'
 alias less='ls -l'
 
 alias ga='git add'
-alias gc='git commit'
+alias gc='git commit -m'
 alias gca='git commit --amend'
 alias gche='git checkout'
 alias gb='git branch'
