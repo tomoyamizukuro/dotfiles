@@ -72,5 +72,10 @@
  nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
  "カラー
+
+ syntax enable
+ set background=dark
+ colorscheme solarized
+ let g:solarized_termcolors=256
  
 
