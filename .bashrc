@@ -25,6 +25,8 @@ alias bashrc='source ~/.bashrc'
 alias bash='source ~/.bashrc'
 alias glo='git log --oneline'
 alias gp='git pull --rebase origin '
+alias gpd='git pull --rebase origin development'
+
 alias gits='git status'
 
 
