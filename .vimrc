@@ -8,6 +8,24 @@
  " 導入したいプラグインを以下に列挙
  " Plugin '[Github Author]/[Github repo]' の形式で記入
  Plugin 'airblade/vim-gitgutter'
+ Plugin 'scrooloose/nerdtree'
+ Plugin 'tpope/vim-rails'
+ Plugin 'tpope/vim-endwise'
+ Plugin 'nathanaelkane/vim-indent-guides'
+  let g:indent_guides_enable_on_vim_startup = 1
+  set tabstop=2
+  set shiftwidth=2
+ Plugin 'Shougo/unit.vim'
+ Plugin 'Shougo/neomru.vim'
+ Plugin 'tpope/vim-fugitive'
+ Plugin 'Shougo/deoplete.nbim'
+ if !has('nvim')
+	 Plugin 'roxma/nvim-yarp'
+	 Plugin 'roxma/vim-hug-neovim-rpc'
+ endif
+
+ Plugin 'Shougo/neosniippet.vim'
+ Plugin 'Shougo/neosniippet-snippets'
  
  call vundle#end()
  filetype plugin indent on
@@ -27,7 +45,7 @@ set hidden
 " 入力中のコマンドをステータスに表示する
 set showcmd
 
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
  " 見た目系
  " 行番号を表示
  set number
@@ -40,8 +58,8 @@ set showcmd
        autocmd CursorHold,CursorHoldI * setlocal cursorline
        augroup END
 
+
  " 現在の行を強調表示（縦）
- 
  
  "set cursorcolumn
  " 行末の1文字先までカーソルを移動できるように
@@ -62,17 +80,13 @@ set showcmd
  " シンタックスハイライトの有効化
  syntax enable
 
- " Tab系
- " 不可視文字を可視化(タブが「▸-」と表示される)
- set list listchars=tab:\▸\-
- " Tab文字を半角スペースにする
- set expandtab
+ " Tab系 " 不可視文字を可視化(タブが「▸-」と表示される) set list listchars=tab:\▸\- " Tab文字を半角スペースにする set expandtab
  " 行頭以外のTab文字の表示幅（スペースいくつ分）
  set tabstop=2
  " 行頭でのTab文字の表示幅
  set shiftwidth=2
-  
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
  " 検索系
  " 検索文字列が小文字の場合は大文字小文字を区別なく検索する
  set ignorecase
@@ -87,9 +101,14 @@ set showcmd
  " ESC連打でハイライト解除
  nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
- "カラー
-
-"syntax enable
-"set background=dark
-"colorscheme solarized
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+ "最後のカーソル位置を復元
+ if has("autocmd")
+   autocmd BufReadPost *
+         \ if line("'\"") > 0 && line("'\"") <= line("$") | 
+         \ exe "normal!" g'\"" |
+         \ endif
+ endif
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"カラースキーマー設定"
+colorscheme desert
