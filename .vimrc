@@ -26,9 +26,8 @@
 
  Plugin 'Shougo/neosniippet.vim'
  Plugin 'Shougo/neosniippet-snippets'
- 
- call vundle#end()
  filetype plugin indent on
+ Plugin 'ibronson/vim-training-whitespace'
 
  "その他のカスタム設定を以下に書く
 
@@ -112,3 +111,23 @@ set showcmd
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "カラースキーマー設定"
 colorscheme desert
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"コピー時、右にずれない
+
+if &term =~ "xterm"
+	let &t_SI .= "\e[?2004h"
+	let &t_SI .= "\e[?2004l"
+	let &pastetoggle = "\e[201~"
+
+	function XTermPasteBegin(ret)
+		set paste
+		return a:ret
+	endfunction
+
+	inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")]
+endif
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
