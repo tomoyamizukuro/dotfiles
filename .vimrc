@@ -30,6 +30,7 @@
  Plugin 'ibronson/vim-training-whitespace'
 
  "その他のカスタム設定を以下に書く
+colorscheme desert
 
 "文字コードをUFT-8に設定
 set fenc=utf-8
@@ -48,19 +49,6 @@ set showcmd
  " 見た目系
  " 行番号を表示
  set number
- " 現在の行を強調表示
- set cursorline
-
- augroup vimrc-auto-cursorline
-   autocmd!
-     autocmd CursorMoved,CursorMovedI,WinLeave * setlocal nocursorline
-       autocmd CursorHold,CursorHoldI * setlocal cursorline
-       augroup END
-
-
- " 現在の行を強調表示（縦）
- 
- "set cursorcolumn
  " 行末の1文字先までカーソルを移動できるように
  set virtualedit=onemore
  " インデントはスマートインデント
@@ -103,31 +91,9 @@ set showcmd
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
  "最後のカーソル位置を復元
  if has("autocmd")
-   autocmd BufReadPost *
+   autocmd BufReadPost *.py
          \ if line("'\"") > 0 && line("'\"") <= line("$") | 
          \ exe "normal!" g'\"" |
          \ endif
  endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"カラースキーマー設定"
-colorscheme desert
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"コピー時、右にずれない
-
-if &term =~ "xterm"
-	let &t_SI .= "\e[?2004h"
-	let &t_SI .= "\e[?2004l"
-	let &pastetoggle = "\e[201~"
-
-	function XTermPasteBegin(ret)
-		set paste
-		return a:ret
-	endfunction
-
-	inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")]
-endif
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
