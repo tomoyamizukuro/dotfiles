@@ -1,3 +1,4 @@
+set shell=/bin/bash
  set nocompatible
  filetype off
  set rtp+=~/.vim/bundle/Vundle.vim
@@ -26,8 +27,9 @@
 
  Plugin 'Shougo/neosniippet.vim'
  Plugin 'Shougo/neosniippet-snippets'
- filetype plugin indent on
  Plugin 'ibronson/vim-training-whitespace'
+ call vundle#end()
+ filetype plugin indent on
 
  "その他のカスタム設定を以下に書く
 colorscheme desert
