@@ -1,38 +1,85 @@
-set shell=/bin/bash
- set nocompatible
- filetype off
- set rtp+=~/.vim/bundle/Vundle.vim
+set shell=/bin/zsh
+set nocompatible
+set clipboard+=unnamed,autoselect
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
 
- call vundle#begin()
- Plugin 'VundleVim/Vundle.vim'
+" Required:
+set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
- " 導入したいプラグインを以下に列挙
- " Plugin '[Github Author]/[Github repo]' の形式で記入
- Plugin 'airblade/vim-gitgutter'
- Plugin 'scrooloose/nerdtree'
- Plugin 'tpope/vim-rails'
- Plugin 'tpope/vim-endwise'
- Plugin 'nathanaelkane/vim-indent-guides'
-  let g:indent_guides_enable_on_vim_startup = 1
-  set tabstop=2
-  set shiftwidth=2
- Plugin 'Shougo/unit.vim'
- Plugin 'Shougo/neomru.vim'
- Plugin 'tpope/vim-fugitive'
- Plugin 'Shougo/deoplete.nbim'
- if !has('nvim')
-	 Plugin 'roxma/nvim-yarp'
-	 Plugin 'roxma/vim-hug-neovim-rpc'
- endif
+" Required:
+if dein#load_state('$HOME/.cache/dein')
+  call dein#begin('$HOME/.cache/dein')
 
- Plugin 'Shougo/neosniippet.vim'
- Plugin 'Shougo/neosniippet-snippets'
- Plugin 'ibronson/vim-training-whitespace'
- call vundle#end()
- filetype plugin indent on
+  " Let dein manage dein
+  " Required:
+  call dein#add('$HOME/.cache/dein/repos/github.com/Shougo/dein.vim')
+
+  " Add or remove your plugins here:
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+	call dein#add('cocopon/iceberg.vim')
+  call dein#add('scrooloose/nerdtree')
+	call dein#add('Shougo/dein.vim')
+	call dein#add('Shougo/neocomplcache.vim')
+	call dein#add('Shougo/neocomplcache-rsense.vim')
+	call dein#add('Yggdroot/indentLine')
+	call dein#add('bronson/vim-trailing-whitespace')
+	call dein#add('tpope/vim-fugitive')
+	call dein#add('airblade/vim-gitgutter')
+	call dein#add('cohama/lexima.vim')
+	" neocomplcacheの設定
+	 " Disable AutoComplPop.
+	 let g:acp_enableAtStartup = 0
+
+	 " Use neocomplcache.
+	 let g:neocomplcache_enable_at_startup = 1
+
+	 " Use smartcase.
+	 let g:neocomplcache_enable_smart_case = 1
+
+	 " Set minimum syntax keyword length.
+	let g:neocomplcache_min_syntax_length = 3
+	 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+	 let g:neocomplcache_enable_camel_case_completion = 1
+	 let g:neocomplcache_enable_underbar_completion = 1
+
+
+	 " Rsense用の設定
+	 if !exists('g:neocomplcache_omni_patterns')
+	     let g:neocomplcache_omni_patterns = {}
+	     endif
+	     let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+	     autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+
+	     "rsenseのインストールフォルダがデフォルトと異なるので設定
+	     let g:rsenseHome = expand("/usr/bin/rsense")
+	     let g:rsenseUseOmniFunc = 1
+
+			 " You can specify revision/branch/tag.
+  call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
+"End dein Scripts-------------------------
 
  "その他のカスタム設定を以下に書く
-colorscheme desert
+colorscheme iceberg
 
 "文字コードをUFT-8に設定
 set fenc=utf-8
@@ -89,13 +136,21 @@ set showcmd
  set hlsearch
  " ESC連打でハイライト解除
  nmap <Esc><Esc> :nohlsearch<CR><Esc>
+ "クリップボード
+ set clipboard+=unnamed
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
  "最後のカーソル位置を復元
  if has("autocmd")
    autocmd BufReadPost *.py
-         \ if line("'\"") > 0 && line("'\"") <= line("$") | 
+         \ if line("'\"") > 0 && line("'\"") <= line("$") |
          \ exe "normal!" g'\"" |
          \ endif
  endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd VimEnter * execute 'NERDTree'
+nnoremap <silent><C-n> :NERDTreeToggle<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"分割、タブ機能など
+

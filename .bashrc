@@ -2,20 +2,23 @@
 #hostname
 
 export PS1="[\u@local \w]$"
+export PGDATA=/usr/local/var/postgres
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+[[ -d ~/.rbenv ]] && \
+	export PATH=${HOME}/.rbenv/bin:${PATH} && \
+	eval "$(rbenv init -)"
+
 tty -s && stty stop undef
 tty -s && stty start undef
 
 alias ll='ls -alF'
 alias lla='ls -l -a'
- 
 alias less='ls -l'
-
 alias ga='git add'
 alias gc='git commit -m'
 alias gca='git commit --amend'
@@ -26,12 +29,9 @@ alias bash='source ~/.bashrc'
 alias glo='git log --oneline'
 alias gp='git pull --rebase origin '
 alias gpd='git pull --rebase origin development'
-
-alias gits='git status'
-
-
-
-
+alias gs='git status'
+alias copy='pbcopy'
+alias paste='pbpaste'
 
 
 HISTTIMEFORMAT='%Y-%m-%d%T'
