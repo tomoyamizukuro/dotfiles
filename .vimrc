@@ -30,7 +30,7 @@ if dein#load_state('$HOME/.cache/dein')
 	call dein#add('tpope/vim-fugitive')
 	call dein#add('airblade/vim-gitgutter')
 	call dein#add('cohama/lexima.vim')
-	call dein#add('rhysd/clever-f.vim')
+	"call dein#add('rhysd/clever-f.vim')
 	call dein#add('tpope/vim-commentary')
 	" neocomplcacheの設定
 	 " Disable AutoComplPop.
